@@ -6,47 +6,65 @@ import csv
 # grades = input("Enter grades separated by commas: ").split(",")
 
 
-def replace():
-
-
-
-    message = f"Hi {} {y},\n\nThis is a reminder that you have {x} tasks left to \
-    submit before you can graduate. You're current grade is {x} and can increase \
-    to if you submit all assignments before the due date.\n\n"
-    print(message)
-
-    for name, task, grade in zip(names, tasks, grades):
-    print(message.format(name, task, grade, int(grade) + 1))
-
-def name():
+def name_surname():
+    o = []
     try:
-        with open("students.csv", "r", encoding="utf-8") as w:
-            csv_reader = csv.reader(w)
-            name_list = []
-            for x in csv_reader:
-                name_list.append(x[1])
+        with open("students.csv", "r", encoding="utf-8") as cs_f:
+            csv_reader = csv.reader(cs_f)
+            for line in csv_reader:
+                o.append(line[1] + " " + line[2])
+
+
+
+
     except FileNotFoundError:
         print("Nie ma takiego pliku")
 
-    return name_list
-def surname():
+    return o
+
+
+def tasks():
+    t = []
     try:
-        with open("students.csv", "r", encoding="utf-8") as w:
-            csv_reader = csv.reader(w)
-            surname = []
-            for x in csv_reader:
-                surname.append(x[2])
+        with open("students.csv", "r", encoding="utf-8") as cs_f:
+            csv_reader = csv.reader(cs_f)
+            for line in csv_reader:
+                t.append(line[3])
+
+
+
     except FileNotFoundError:
         print("Nie ma takiego pliku")
 
-    return surname
+    return t
 
-name()
-surname()
 
-replace()
+def rating():
+    r = []
+    try:
+        with open("students.csv", "r", encoding="utf-8") as cs_f:
+            csv_reader = csv.reader(cs_f)
+            for line in csv_reader:
+                r.append(line[4])
 
-'''
+    except FileNotFoundError:
+        print("Nie ma takiego pliku")
 
-I'll finish up soon
-'''
+    return r
+
+
+#
+# m = f"Hi {a},\n\nThis is a reminder that you have {b} tasks left to \
+# submit before you can graduate. You're current grade is {c} and can increase \
+# to {d} if you submit all assignments before the due date.\n\n"
+
+
+if __name__ == "__main__":
+    for x, y, b in zip(name_surname(), rating(), tasks()):
+        u = 20
+        print(f"Hi {x},\n\nThis is a reminder that you have {b} tasks left to \
+     submit before you can graduate. You're current grade is {y} and can increase \
+      if you submit all assignments before the due date.\n\n")
+
+
+
